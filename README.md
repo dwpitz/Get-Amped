@@ -1,7 +1,7 @@
 # Get Amped - A Surfer's Odyssey
 A surfer attempts to navigate a treacherous break.  Can they hang ten?
 
-![Get Amped - A Surfer's Odyssey](/images/characters_wireframe.jpg)
+![Get Amped - A Surfer's Odyssey](/images/characters_wireframe.jpg =250x)
 
 ## User Stories
 * User selects 1 or 2 players from the start screen.  The game starts upon selection.
@@ -10,7 +10,7 @@ A surfer attempts to navigate a treacherous break.  Can they hang ten?
 * User must navigate 5 different collections of marine life obstacles, which move up the screen towards the surfer.
 * User must find the gaps in the marine life obstacles in order to successfully navigate through them.
 
-![Get Amped - A Surfer's Odyssey](/images/gameplay_wireframes.jpg)
+![Get Amped - A Surfer's Odyssey](/images/gameplay_wireframes.jpg =250x)
 
 * User starts with a Stoke Level of 10.  Each item they hit can inflict a certain amount of damage on the surfer's Stoke Level.
 	* Sharks and Seals - 4 pts.
@@ -20,7 +20,7 @@ A surfer attempts to navigate a treacherous break.  Can they hang ten?
 * If a user hits 25 points they win the game! Righteous! 
 * If a user's pts reach zero, it’s a total wipeout.  Game Over.  Gnarley...
 
-![Get Amped - A Surfer's Odyssey](wipeout-wireframe.jpg)
+![Get Amped - A Surfer's Odyssey](/images/wipeout-wireframe.jpg =250x)
 
 * In a two player game, surfers play 3 times.  First person to win 2 rounds wins the matchup.
 * ---------------------------MVP-------------------------------------
