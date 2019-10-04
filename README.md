@@ -1,5 +1,5 @@
 # Get Amped - A Surfer's Odyssey
-A surfer attempts to navigate a treacherous 
+A surfer attempts to navigate a treacherous break.  Can you hang ten?
 
 ## User Stories
 * User selects 1 or 2 players from the start screen.  The game starts upon selection.
