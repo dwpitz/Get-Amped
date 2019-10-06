@@ -4,6 +4,8 @@ console.log(canvas);
 const ctx = canvas.getContext('2d');
 console.log(ctx);
 
+
+
 let image = document.getElementById("my image");
 ctx.drawImage(image, 0, 0, )
 
