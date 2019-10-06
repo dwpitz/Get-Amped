@@ -1,29 +1,32 @@
 body {
-	background-color: Aqua;
+    background-color: Aqua;
 }
 
 .nav {
-	display: flex;
-	flex-direction: center;
-	height: 65px;
-	width: 720px;
+    display: flex;
+    flex-direction: center;
+    height: 65px;
+    width: 720px;
 }
 
 .stats {
-	background-color: White;
-	border: 1px dotted;
-	border-color: black;
-	list-style-type: none;
-	align-items: center;
-	align-content: center;
-	flex: 1;
-	font-family: 'Luckiest Guy';
-	font-size: 30px;
-	text-align: center;
+    background-color: White;
+    border: 1px dotted;
+    border-color: black;
+    list-style-type: none;
+    align-items: center;
+    align-content: center;
+    flex: 1;
+    font-family: 'Luckiest Guy';
+    font-size: 30px;
+    color: pink;
+    font- text-align: center;
+    margin: 2px;
 
 }
 
 canvas {
-  border: 1px dotted;
-  background-color: white;
-} 
+    border: 1px dotted;
+    /*  background-color: white;*/
+    /*background-image: images/water_and_sky_2.jpg*/
+}
