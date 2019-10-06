@@ -1,3 +1,29 @@
 body {
 	background-color: Aqua;
 }
+
+.nav {
+	display: flex;
+	flex-direction: center;
+	height: 65px;
+	width: 720px;
+}
+
+.stats {
+	background-color: White;
+	border: 1px dotted;
+	border-color: black;
+	list-style-type: none;
+	align-items: center;
+	align-content: center;
+	flex: 1;
+	font-family: 'Luckiest Guy';
+	font-size: 30px;
+	text-align: center;
+
+}
+
+canvas {
+  border: 1px dotted;
+  background-color: white;
+} 
