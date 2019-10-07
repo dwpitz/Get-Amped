@@ -16,7 +16,7 @@ theWave.draw()
 const surfer = {
     x: 190,
     y: 200,
-    r: 50,
+    // r: 50, <== Is this needed??  Possibly for collision?
     speed: 15,
     draw() {
     	let surfDude = document.getElementById("surfer");
@@ -44,11 +44,10 @@ surfer.draw()
 const swimmer = {
 	x: 550,
 	y: 250,
-	r: 50,
+	// r: 50, <== Is this needed??  Possibly for collision?
 	draw() {
 		const swimmer = document.getElementById("swimmer");
 		ctx.drawImage(swimmer, this.x, this.y)
-		// this.draw();
 	},
 	move() {
 		this.x -= 1;
@@ -58,25 +57,21 @@ const swimmer = {
 }
 swimmer.draw()
 
-function animate(){
-	swimmer.move();
-	clearCanvas();
-	window.requestAnimationFrame(animate)
-}
-
 function clearCanvas(){
 	ctx.clearRect(0, 0, canvas.height, canvas.width)
 	theWave.draw();
 	surfer.draw();
 	swimmer.draw();
-	// ctx.drawImage(theWave.draw(), 0, 0, )
-	// ctx.drawImage(surfer.draw(), this.x, this.y)
 }
 
+function animate(){
+	swimmer.move();
+	clearCanvas();
+	window.requestAnimationFrame(animate)
+}
+// animate()
 
-
-//Listeners
+//LISTENERS
 document.addEventListener('keydown', (event) => {
     surfer.move(event.key)
 })
-
