@@ -15,6 +15,15 @@ function clearCanvas(){
 	ctx.drawImage(surfDude, this.x, this.y)
 }
 
+let x = 0;
+function animate(){
+	console.log(++x)
+	swimmer.move();
+	clearCanvas();
+	swimmer.draw();
+	window.requestAnimationFrame(animate)
+}
+
 // backgroundWave();
 
 const surfer = {
@@ -57,6 +66,7 @@ const swimmer = {
 		// this.draw();
 	},
 	move() {
+		this.x -= 1;
 		clearCanvas()
         this.draw();
 	}
@@ -67,3 +77,4 @@ document.addEventListener('keydown', (event) => {
     // console.log(event);
     surfer.move(event.key)
 })
+
