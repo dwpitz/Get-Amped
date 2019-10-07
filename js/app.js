@@ -6,33 +6,25 @@ console.log(ctx);
 
 
 
-let image = document.getElementById("my image");
+let image = document.getElementById("background");
 ctx.drawImage(image, 0, 0, )
 
 function clearCanvas(){
 	ctx.clearRect(0, 0, canvas.height, canvas.width)
 	ctx.drawImage(image, 0, 0, )
+	ctx.drawImage(surfDude, this.x, this.y)
 }
 
 // backgroundWave();
 
 const surfer = {
-    x: 360,
-    y: 330,
-    r: 25,
-    color: "red",
-    speed: 10,
-    surferImage(){
-  //   	surfDude = document.getElementById("surfer");
-		// ctx.drawImage(surfDude, 0, 0, )
-    },
+    x: 190,
+    y: 200,
+    r: 50,
+    speed: 15,
     draw() {
     	surfDude = document.getElementById("surfer");
 		ctx.drawImage(surfDude, this.x, this.y)
-        // ctx.beginPath();
-        // ctx.arc(this.x, this.y, this.r, 0, Math.PI);
-        // ctx.fillStyle = this.color;
-        // ctx.fill();
     },
     move(direction) {
         if (direction == "ArrowDown") {
@@ -47,11 +39,29 @@ const surfer = {
         if (direction == "ArrowRight") {
             this.x += this.speed;
         }
+        //THIS IS BAD. GET THIS OUT OF THE SURFER
         clearCanvas()
         this.draw();
+        swimmer.draw();
     }
 }
 surfer.draw()
+
+const swimmer = {
+	x: 550,
+	y: 250,
+	r: 50,
+	draw() {
+		const swimmer = document.getElementById("swimmer");
+		ctx.drawImage(swimmer, this.x, this.y)
+		// this.draw();
+	},
+	move() {
+		clearCanvas()
+        this.draw();
+	}
+}
+swimmer.draw()
 
 document.addEventListener('keydown', (event) => {
     // console.log(event);
