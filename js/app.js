@@ -58,6 +58,12 @@ const swimmer = {
 }
 swimmer.draw()
 
+function animate(){
+	swimmer.move();
+	clearCanvas();
+	window.requestAnimationFrame(animate)
+}
+
 function clearCanvas(){
 	ctx.clearRect(0, 0, canvas.height, canvas.width)
 	theWave.draw();
@@ -67,15 +73,7 @@ function clearCanvas(){
 	// ctx.drawImage(surfer.draw(), this.x, this.y)
 }
 
-function animate(){
-	let x = 0;
-	// console.log(++x)
-	swimmer.move();
-	clearCanvas();
-	swimmer.draw();
-	surfer.draw();
-	window.requestAnimationFrame(animate)
-}
+
 
 //Listeners
 document.addEventListener('keydown', (event) => {
