@@ -1,30 +1,17 @@
 const canvas = document.getElementById('my-canvas')
 console.log(canvas);
-
 const ctx = canvas.getContext('2d');
 console.log(ctx);
 
-
-
-let image = document.getElementById("background");
-ctx.drawImage(image, 0, 0, )
-
-function clearCanvas(){
-	ctx.clearRect(0, 0, canvas.height, canvas.width)
-	ctx.drawImage(image, 0, 0, )
-	ctx.drawImage(surfDude, this.x, this.y)
+const theWave = {
+	x: 0,
+	y: 0,
+	draw(){
+		let image = document.getElementById("background");
+		ctx.drawImage(image, this.x, this.y)
+	}
 }
-
-let x = 0;
-function animate(){
-	console.log(++x)
-	swimmer.move();
-	clearCanvas();
-	swimmer.draw();
-	window.requestAnimationFrame(animate)
-}
-
-// backgroundWave();
+theWave.draw()
 
 const surfer = {
     x: 190,
@@ -32,7 +19,7 @@ const surfer = {
     r: 50,
     speed: 15,
     draw() {
-    	surfDude = document.getElementById("surfer");
+    	let surfDude = document.getElementById("surfer");
 		ctx.drawImage(surfDude, this.x, this.y)
     },
     move(direction) {
@@ -48,14 +35,12 @@ const surfer = {
         if (direction == "ArrowRight") {
             this.x += this.speed;
         }
-        //THIS IS BAD. GET THIS OUT OF THE SURFER
         clearCanvas()
-        this.draw();
-        swimmer.draw();
     }
 }
 surfer.draw()
 
+// SHOULD THIS BE AN OBSTACLE CLASS INSTEAD?
 const swimmer = {
 	x: 550,
 	y: 250,
@@ -68,13 +53,32 @@ const swimmer = {
 	move() {
 		this.x -= 1;
 		clearCanvas()
-        this.draw();
+
 	}
 }
 swimmer.draw()
 
+function clearCanvas(){
+	ctx.clearRect(0, 0, canvas.height, canvas.width)
+	theWave.draw();
+	surfer.draw();
+	swimmer.draw();
+	// ctx.drawImage(theWave.draw(), 0, 0, )
+	// ctx.drawImage(surfer.draw(), this.x, this.y)
+}
+
+function animate(){
+	let x = 0;
+	// console.log(++x)
+	swimmer.move();
+	clearCanvas();
+	swimmer.draw();
+	surfer.draw();
+	window.requestAnimationFrame(animate)
+}
+
+//Listeners
 document.addEventListener('keydown', (event) => {
-    // console.log(event);
     surfer.move(event.key)
 })
 
