@@ -3,6 +3,8 @@ console.log(canvas);
 const ctx = canvas.getContext('2d');
 console.log(ctx);
 
+
+
 const theWave = {
 	x: 0,
 	y: 0,
@@ -16,8 +18,8 @@ theWave.draw()
 const surfer = {
     x: 50,
     y: 200,
-    width: 100,
-	height: 100,
+    width: 25,
+	height: 25,
     // r: 50, <== Is this needed??  Possibly for collision?
     speed: 15,
     draw() {
@@ -58,10 +60,10 @@ surfer.draw()
 
 // SHOULD THIS BE AN OBSTACLE CLASS INSTEAD?
 const swimmer = {
-	x: 700,
+	x: 725,
 	y: 250,
-	width: 100,
-	height: 100,
+	width: 25,
+	height: 25,
 	// r: 50, <== Is this needed??  Possibly for collision?
 	draw() {
 		const swimmer = document.getElementById("swimmer");
@@ -93,4 +95,10 @@ function animate(){
 //LISTENERS
 document.addEventListener('keydown', (event) => {
     surfer.move(event.key)
-})
+}),
+document.addEventListener('click', (event) => {
+	animate()
+}
+) 
+
+background.style.display = "none";
