@@ -3,7 +3,7 @@ console.log(canvas);
 const ctx = canvas.getContext('2d');
 console.log(ctx);
 
-
+background.style.display = "none";
 
 const theWave = {
 	x: 0,
@@ -13,30 +13,31 @@ const theWave = {
 		ctx.drawImage(image, this.x, this.y)
 	}
 }
-theWave.draw()
+// theWave.draw()
 
 const surfer = {
     x: 50,
     y: 200,
-    width: 25,
-	height: 25,
+    width: 50,
+	height: 50,
     // r: 50, <== Is this needed??  Possibly for collision?
     speed: 15,
     draw() {
     	let surfDude = document.getElementById("surfer");
 		ctx.drawImage(surfDude, this.x, this.y)
     },
+    //Add canvas restrictions here.  && 
     move(direction) {
-        if (direction == "ArrowDown") {
+        if (direction == "ArrowDown" && this.y < 319){
             this.y += this.speed;
         }
-        if (direction == "ArrowUp") {
+        if (direction == "ArrowUp" && this.y > 135){
             this.y -= this.speed;
         }
-        if (direction == "ArrowLeft") {
+        if (direction == "ArrowLeft" && this.x > 5) {
             this.x -= this.speed;
         }
-        if (direction == "ArrowRight") {
+        if (direction == "ArrowRight" && this.x < 620) {
             this.x += this.speed;
         }
         clearCanvas()
@@ -56,14 +57,14 @@ const surfer = {
     else return false;
   },
 }
-surfer.draw()
+//surfer.draw()
 
 // SHOULD THIS BE AN OBSTACLE CLASS INSTEAD?
 const swimmer = {
 	x: 725,
 	y: 250,
-	width: 25,
-	height: 25,
+	width: 50,
+	height: 50,
 	// r: 50, <== Is this needed??  Possibly for collision?
 	draw() {
 		const swimmer = document.getElementById("swimmer");
@@ -90,15 +91,30 @@ function animate(){
 	clearCanvas();
 	window.requestAnimationFrame(animate)
 }
-// animate()
+
+//GAMEPLAY OBJECT
+const gamePlay = {
+	time: 0,
+	start: function(){
+		theWave.draw()
+		//This is Temporary
+		alert('Ready To Get Amped?')
+		surfer.draw()
+	}
+	
+
+
+
+}
+gamePlay.start()
+
 
 //LISTENERS
 document.addEventListener('keydown', (event) => {
     surfer.move(event.key)
 }),
-document.addEventListener('click', (event) => {
+document.getElementById("animation").addEventListener('click', (event) => {
 	animate()
 }
 ) 
 
-background.style.display = "none";
