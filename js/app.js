@@ -14,8 +14,10 @@ const theWave = {
 theWave.draw()
 
 const surfer = {
-    x: 190,
+    x: 50,
     y: 200,
+    width: 100,
+	height: 100,
     // r: 50, <== Is this needed??  Possibly for collision?
     speed: 15,
     draw() {
@@ -36,14 +38,30 @@ const surfer = {
             this.x += this.speed;
         }
         clearCanvas()
+    },
+
+    checkCollision(swimmer) {
+    if(
+    	//this checks to see if we've collided with any corner/side of a thing  
+    	this.x + this.width > swimmer.x &&
+      	this.x < swimmer.x + swimmer.width &&
+      	swimmer.y < this.y + this.height && 
+      	swimmer.y + swimmer.height > this.y
+      	) {
+      console.log("collision");
+      return true
     }
+    else return false;
+  },
 }
 surfer.draw()
 
 // SHOULD THIS BE AN OBSTACLE CLASS INSTEAD?
 const swimmer = {
-	x: 550,
+	x: 700,
 	y: 250,
+	width: 100,
+	height: 100,
 	// r: 50, <== Is this needed??  Possibly for collision?
 	draw() {
 		const swimmer = document.getElementById("swimmer");
@@ -53,7 +71,7 @@ const swimmer = {
 		this.x -= 1;
 		clearCanvas()
 
-	}
+	},
 }
 swimmer.draw()
 
@@ -66,6 +84,7 @@ function clearCanvas(){
 
 function animate(){
 	swimmer.move();
+	surfer.checkCollision(swimmer);
 	clearCanvas();
 	window.requestAnimationFrame(animate)
 }
