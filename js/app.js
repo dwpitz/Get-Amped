@@ -76,7 +76,7 @@ const swimmer = {
 
 	},
 }
-swimmer.draw()
+// swimmer.draw()
 
 function clearCanvas(){
 	ctx.clearRect(0, 0, canvas.height, canvas.width)
@@ -96,16 +96,20 @@ function animate(){
 const gamePlay = {
 	time: 0,
 	start: function(){
-		theWave.draw()
-		//This is Temporary
-		alert('Ready To Get Amped?')
+		console.log(gamePlay.timer());
+		theWave.draw();
+		alert('Ready To Get Amped?') //<======Temporary...should be a DOM element
 		surfer.draw()
+		swimmer.draw()
+		//animate() <==== Do this later...
+	},
+	timer: function(){
+		const rideTime = setInterval(() => {
+			this.time++
+	}, 1000); 
 	}
-	
-
-
-
 }
+
 gamePlay.start()
 
 
