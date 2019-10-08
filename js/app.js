@@ -21,7 +21,7 @@ const surfer = {
     width: 50,
     height: 50,
     // r: 50, <== Is this needed??  Possibly for collision?
-    speed: 15,
+    speed: 25,
     draw() {
         let surfDude = document.getElementById("surfer");
         ctx.drawImage(surfDude, this.x, this.y)
@@ -43,13 +43,13 @@ const surfer = {
         clearCanvas()
     },
 
-    checkCollision(swimmer) {
+    checkCollision(randomAnimal) {
         if (
             //this checks to see if we've collided with any corner/side of a thing  
-            this.x + this.width > swimmer.x &&
-            this.x < swimmer.x + swimmer.width &&
-            swimmer.y < this.y + this.height &&
-            swimmer.y + swimmer.height > this.y
+            this.x + this.width > randomAnimal.x &&
+            this.x < randomAnimal.x + randomAnimal.width &&
+            randomAnimal.y < this.y + this.height &&
+            randomAnimal.y + randomAnimal.height > this.y
         ) {
             console.log("collision");
             return true
@@ -70,7 +70,7 @@ const swimmer = {
         ctx.drawImage(swimmer, this.x, this.y)
     },
     move() {
-        this.x -= 1;
+        this.x -= 2;
         clearCanvas()
 
     },
@@ -87,7 +87,7 @@ const seal = {
         ctx.drawImage(seal, this.x, this.y)
     },
     move() {
-        this.x -= 1;
+        this.x -= 2;
         clearCanvas()
 
     },
@@ -104,7 +104,7 @@ const jelly = {
         ctx.drawImage(jellyfish, this.x, this.y)
     },
     move() {
-        this.x -= 1;
+        this.x -= 2;
         clearCanvas()
 
     },
@@ -121,12 +121,12 @@ const shark = {
         ctx.drawImage(shark, this.x, this.y)
     },
     move() {
-        this.x -= 1;
+        this.x -= 2;
         clearCanvas()
 
     },
 }
-// swimmer.draw()
+//You gottga stow this away somewhere....
 	const marineLife = [swimmer, seal, jelly, shark]
 	const randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
 
@@ -147,7 +147,7 @@ function animate() {
 	randomAnimal.move()
     // let currentObstacle = marineLife[Math.floor(Math.random() * marineLife.length)]
    	// currentObstacle.move()
-    // surfer.checkCollision(currentObstacle);
+    surfer.checkCollision(randomAnimal);
     clearCanvas();
     window.requestAnimationFrame(animate)
 }
@@ -155,7 +155,7 @@ function animate() {
 //GAMEPLAY OBJECT
 const gamePlay = {
     time: 0,
-    start: function() {
+    start: function() 	{
         console.log(gamePlay.timer());
         theWave.draw();
         alert('Ready To Get Amped?') //<======Temporary...should ultimately be a DOM element
