@@ -92,6 +92,40 @@ const seal = {
 
     },
 }
+
+const jelly = {
+    x: 725,
+	y: Math.floor(Math.random() * 100) + 225,
+    width: 50,
+    height: 50,
+    // r: 50, <== Is this needed??  Possibly for collision?
+    draw() {
+        const jellyfish = document.getElementById("jellyfish");
+        ctx.drawImage(jellyfish, this.x, this.y)
+    },
+    move() {
+        this.x -= 1;
+        clearCanvas()
+
+    },
+}
+
+const shark = {
+    x: 725,
+	y: Math.floor(Math.random() * 100) + 225,
+    width: 50,
+    height: 50,
+    // r: 50, <== Is this needed??  Possibly for collision?
+    draw() {
+        const shark = document.getElementById("shark");
+        ctx.drawImage(shark, this.x, this.y)
+    },
+    move() {
+        this.x -= 1;
+        clearCanvas()
+
+    },
+}
 // swimmer.draw()
 
 //Testing Images HERE <========================================================
@@ -99,12 +133,12 @@ function clearCanvas() {
     ctx.clearRect(0, 0, canvas.height, canvas.width)
     theWave.draw();
     surfer.draw();
-    seal.draw();
+    shark.draw();
 }
 
 //Testing Images HERE <========================================================
 function animate() {
-    seal.move();
+    shark.move();
     surfer.checkCollision(swimmer);
     clearCanvas();
     window.requestAnimationFrame(animate)
