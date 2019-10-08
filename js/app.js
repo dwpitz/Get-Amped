@@ -5,6 +5,7 @@ console.log(ctx);
 
 background.style.display = "none";
 
+//OBJECTS
 const theWave = {
     x: 0,
     y: 0,
@@ -20,13 +21,12 @@ const surfer = {
     y: 200,
     width: 50,
     height: 50,
-    // r: 50, <== Is this needed??  Possibly for collision?
-    speed: 25,
+    speed: 20,
     draw() {
         let surfDude = document.getElementById("surfer");
         ctx.drawImage(surfDude, this.x, this.y)
     },
-    //Add canvas restrictions here.  && 
+
     move(direction) {
         if (direction == "ArrowDown" && this.y < 319) {
             this.y += this.speed;
@@ -61,7 +61,7 @@ const surfer = {
 // SHOULD THIS BE AN OBSTACLE CLASS INSTEAD?
 const swimmer = {
     x: 725,
-	y: Math.floor(Math.random() * 100) + 225,
+    y: Math.floor(Math.random() * 100) + 225,
     width: 50,
     height: 50,
     // r: 50, <== Is this needed??  Possibly for collision?
@@ -72,13 +72,12 @@ const swimmer = {
     move() {
         this.x -= 2;
         clearCanvas()
-
     },
 }
 
 const seal = {
     x: 725,
-	y: Math.floor(Math.random() * 100) + 225,
+    y: Math.floor(Math.random() * 100) + 225,
     width: 50,
     height: 50,
     // r: 50, <== Is this needed??  Possibly for collision?
@@ -89,13 +88,12 @@ const seal = {
     move() {
         this.x -= 2;
         clearCanvas()
-
     },
 }
 
 const jelly = {
     x: 725,
-	y: Math.floor(Math.random() * 100) + 225,
+    y: Math.floor(Math.random() * 100) + 225,
     width: 50,
     height: 50,
     // r: 50, <== Is this needed??  Possibly for collision?
@@ -106,13 +104,12 @@ const jelly = {
     move() {
         this.x -= 2;
         clearCanvas()
-
     },
 }
 
 const shark = {
     x: 725,
-	y: Math.floor(Math.random() * 100) + 225,
+    y: Math.floor(Math.random() * 100) + 225,
     width: 50,
     height: 50,
     // r: 50, <== Is this needed??  Possibly for collision?
@@ -123,7 +120,6 @@ const shark = {
     move() {
         this.x -= 2;
         clearCanvas()
-
     },
 }
 
@@ -132,15 +128,16 @@ let marineLife = [swimmer, seal, jelly, shark]
 let randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
 
 
+//FUNCTIONS
 function clearCanvas() {
-	//context.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.height, canvas.width)
     theWave.draw();
     surfer.draw();
     randomAnimal.draw();
 }
 
 function animate() {
-	randomAnimal.move()
+    randomAnimal.move()
     surfer.checkCollision(randomAnimal);
     clearCanvas();
     window.requestAnimationFrame(animate)
@@ -149,7 +146,7 @@ function animate() {
 //GAMEPLAY OBJECT
 const gamePlay = {
     time: 0,
-    start: function() 	{
+    start: function() {
         console.log(gamePlay.timer());
         theWave.draw();
         alert('Ready To Get Amped?') //<======Temporary...should ultimately be a DOM element
@@ -162,15 +159,12 @@ const gamePlay = {
         const rideTime = setInterval(() => {
             this.time++
             this.printStats();
-
-
-
-            const arbTime = Math.floor(Math.random()* 3 + 1)
-            if(this.time % arbTime === 0) {
-            	marineLife = [swimmer, seal, jelly, shark]
-				randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
-				randomAnimal.move()
-            	randomAnimal.draw()
+			const arbTime = Math.floor(Math.random() * 3 + 1)
+            if (this.time % arbTime === 0) {
+                marineLife = [swimmer, seal, jelly, shark]
+                randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
+                randomAnimal.draw()
+                randomAnimal.move()
             }
         }, 1000);
     },
@@ -179,7 +173,7 @@ const gamePlay = {
         const timer = document.getElementById("ride-time");
         console.log(timer)
         timer.textContent = this.time
-        
+
     }
 }
 
@@ -188,7 +182,7 @@ gamePlay.start()
 //LISTENERS
 document.addEventListener('keydown', (event) => {
         surfer.move(event.key)
-    }),
-    document.getElementById("animation").addEventListener('click', (event) => {
+    })
+document.getElementById("animation").addEventListener('click', (event) => {
         animate()
     })
