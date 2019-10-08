@@ -133,6 +133,7 @@ let randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
 
 
 function clearCanvas() {
+	//context.clearRect(0, 0, canvas.width, canvas.height);
     theWave.draw();
     surfer.draw();
     randomAnimal.draw();
@@ -164,7 +165,7 @@ const gamePlay = {
 
 
 
-            const arbTime = Math.floor(Math.random()*3 + 1)
+            const arbTime = Math.floor(Math.random()* 3 + 1)
             if(this.time % arbTime === 0) {
             	marineLife = [swimmer, seal, jelly, shark]
 				randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
