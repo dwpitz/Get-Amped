@@ -61,7 +61,7 @@ const surfer = {
 // SHOULD THIS BE AN OBSTACLE CLASS INSTEAD?
 const swimmer = {
     x: 725,
-    y: 250,
+	y: Math.floor(Math.random() * 100) + 225,
     width: 50,
     height: 50,
     // r: 50, <== Is this needed??  Possibly for collision?
@@ -75,17 +75,36 @@ const swimmer = {
 
     },
 }
+
+const seal = {
+    x: 725,
+	y: Math.floor(Math.random() * 100) + 225,
+    width: 50,
+    height: 50,
+    // r: 50, <== Is this needed??  Possibly for collision?
+    draw() {
+        const seal = document.getElementById("seal");
+        ctx.drawImage(seal, this.x, this.y)
+    },
+    move() {
+        this.x -= 1;
+        clearCanvas()
+
+    },
+}
 // swimmer.draw()
 
+//Testing Images HERE <========================================================
 function clearCanvas() {
     ctx.clearRect(0, 0, canvas.height, canvas.width)
     theWave.draw();
     surfer.draw();
-    swimmer.draw();
+    seal.draw();
 }
 
+//Testing Images HERE <========================================================
 function animate() {
-    swimmer.move();
+    seal.move();
     surfer.checkCollision(swimmer);
     clearCanvas();
     window.requestAnimationFrame(animate)
