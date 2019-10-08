@@ -126,27 +126,20 @@ const shark = {
 
     },
 }
-//You gottga stow this away somewhere....
-	const marineLife = [swimmer, seal, jelly, shark]
-	const randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
+
+//You gotta stow this away somewhere....
+let marineLife = [swimmer, seal, jelly, shark]
+let randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
 
 
-
-
-
-//Testing Images HERE <========================================================
 function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.height, canvas.width)
     theWave.draw();
     surfer.draw();
     randomAnimal.draw();
 }
 
-//Testing Images HERE <========================================================
 function animate() {
 	randomAnimal.move()
-    // let currentObstacle = marineLife[Math.floor(Math.random() * marineLife.length)]
-   	// currentObstacle.move()
     surfer.checkCollision(randomAnimal);
     clearCanvas();
     window.requestAnimationFrame(animate)
@@ -160,7 +153,7 @@ const gamePlay = {
         theWave.draw();
         alert('Ready To Get Amped?') //<======Temporary...should ultimately be a DOM element
         surfer.draw()
-        swimmer.draw()
+        //swimmer.draw()
         //animate() <==== Do this later...
     },
 
@@ -168,6 +161,16 @@ const gamePlay = {
         const rideTime = setInterval(() => {
             this.time++
             this.printStats();
+
+
+
+            const arbTime = Math.floor(Math.random()*3 + 1)
+            if(this.time % arbTime === 0) {
+            	marineLife = [swimmer, seal, jelly, shark]
+				randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
+				randomAnimal.move()
+            	randomAnimal.draw()
+            }
         }, 1000);
     },
 
