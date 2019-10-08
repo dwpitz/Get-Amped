@@ -127,19 +127,27 @@ const shark = {
     },
 }
 // swimmer.draw()
+	const marineLife = [swimmer, seal, jelly, shark]
+	const randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
+
+
+
+
 
 //Testing Images HERE <========================================================
 function clearCanvas() {
     ctx.clearRect(0, 0, canvas.height, canvas.width)
     theWave.draw();
     surfer.draw();
-    shark.draw();
+    randomAnimal.draw();
 }
 
 //Testing Images HERE <========================================================
 function animate() {
-    shark.move();
-    surfer.checkCollision(swimmer);
+	randomAnimal.move()
+    // let currentObstacle = marineLife[Math.floor(Math.random() * marineLife.length)]
+   	// currentObstacle.move()
+    // surfer.checkCollision(currentObstacle);
     clearCanvas();
     window.requestAnimationFrame(animate)
 }
