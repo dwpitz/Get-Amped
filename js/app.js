@@ -64,12 +64,12 @@ const surfer = {
         }
     },
 
-    checkCollision(randomAnimal) {
+    checkCollision(Obstacle) {
         if (
-            this.x + this.width > randomAnimal.x &&
-            this.x < randomAnimal.x + randomAnimal.width &&
-            randomAnimal.y < this.y + this.height &&
-            randomAnimal.y + randomAnimal.height > this.y
+            this.x + this.width > Obstacle.x &&
+            this.x < Obstacle.x + Obstacle.width &&
+            Obstacle.y < this.y + this.height &&
+            Obstacle.y + Obstacle.height > this.y
         ) {
             console.log("collision");
             return true
@@ -132,8 +132,6 @@ const gamePlay = {
     	for (let i = 0; i < this.animals.length; i++) {
     		this.animals[i].move();
     	}	
-
-    // gamePlay.animals[1].move()
 	}
 }
 
@@ -143,15 +141,13 @@ function animate() {
     theWave.draw();
     surfer.draw();
     gamePlay.drawAnimals()
-    // surfer.checkCollision(randomAnimal);
+    surfer.checkCollision(Obstacle);
     window.requestAnimationFrame(animate)
 }
 
 function clearCanvas() {
     ctx.clearRect(0, 0, canvas.height, canvas.width)
 }
-
-
 
 gamePlay.start();
 
