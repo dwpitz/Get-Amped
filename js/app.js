@@ -50,17 +50,17 @@ const surfer = {
             randomAnimal.y + randomAnimal.height > this.y
         ) {
             console.log("collision");
-            return true
-            if(randomAnimal === swimmer){
-            	gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
-            } else if (randomAnimal === seal){
-            	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
-            } else if (randomAnimal === shark){
-            	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
-            } else if (randomAnimal === jelly){
-            	gamePlay.stokeLevel = gamePlay.stokeLevel - 3;
-            }
-        } else return false;
+        //     return true
+        //     if(randomAnimal === swimmer){
+        //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
+        //     } else if (randomAnimal === seal){
+        //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
+        //     } else if (randomAnimal === shark){
+        //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
+        //     } else if (randomAnimal === jelly){
+        //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 3;
+        //     }
+        // } else return false;
     },
 }
 //surfer.draw()
@@ -134,10 +134,14 @@ function clearCanvas() {
 
 function animate() {
     clearCanvas();
-    randomAnimal.move()
     theWave.draw();
     surfer.draw();
+    
+    // game.drawAnimals()
+
+    randomAnimal.move()
     randomAnimal.draw();
+
     surfer.checkCollision(randomAnimal);
     window.requestAnimationFrame(animate)
 }
@@ -146,6 +150,8 @@ function animate() {
 const gamePlay = {
     time: 0,
     stokeLevel: 10,
+    animals: []
+
     start: function() {
         gamePlay.timer()
         theWave.draw();
@@ -160,16 +166,23 @@ const gamePlay = {
             this.time++
             this.printStats();
 			const arbTime = Math.floor(Math.random() * 3 + 1)
-            if (this.time % arbTime === 0) {
-                randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
-            }
+
+			// generate new animal
+			// 
+            // if (this.time % arbTime === 0) {
+            //     randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
+            // }
+
+
         }, 1000);
     },
 
     printStats: function() {
         const timer = document.getElementById("ride-time");
-        console.log(timer)
         timer.textContent = this.time
+    }
+
+    drawAnimals: function() {
 
     }
 }
