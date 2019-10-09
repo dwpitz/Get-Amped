@@ -6,6 +6,22 @@ console.log(ctx);
 background.style.display = "none";
 
 //OBJECTS
+class Obstacle {
+	constructor(){
+	    const animalPossibilities = ["swimmer", "seal", "jelly", "shark"];
+	    this.id = animalPossibilities[Math.floor(Math.random() * animalPossibilities.length)];
+		this.x = 735;
+		this.y = Math.floor(Math.random() * 100) + 225;
+		this.width = 50;
+		this.height = 50;
+		this.move = this.x -= Math.floor(Math.random() * 3) +1;
+		this.draw = () => {
+			let image = document.getElementById(this.id)
+			ctx.drawImage(image, this.x, this.y);
+		}		
+	}
+};
+
 const theWave = {
     x: 0,
     y: 0,
@@ -42,14 +58,14 @@ const surfer = {
     },
 
     checkCollision(randomAnimal) {
-        if (
-            //this checks to see if we've collided with any corner/side of a thing  
+        if ( 
             this.x + this.width > randomAnimal.x &&
             this.x < randomAnimal.x + randomAnimal.width &&
             randomAnimal.y < this.y + this.height &&
             randomAnimal.y + randomAnimal.height > this.y
         ) {
             console.log("collision");
+<<<<<<< HEAD
         //     return true
         //     if(randomAnimal === swimmer){
         //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
@@ -79,53 +95,84 @@ const swimmer = {
     move() {
         this.x -= 2;
     },
+=======
+            return true
+//         //     if(randomAnimal === swimmer){
+//         //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
+//         //     } else if (randomAnimal === seal){
+//         //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
+//         //     } else if (randomAnimal === shark){
+//         //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
+//         //     } else if (randomAnimal === jelly){
+//         //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 3;
+//         //     }
+//         // } else return false;
+    	}
+	}
+>>>>>>> new-obstacle-class-branch-use-this-one
 }
 
-const seal = {
-    x: 725,
-    y: Math.floor(Math.random() * 100) + 225,
-    width: 50,
-    height: 50,
-    draw() {
-        const seal = document.getElementById("seal");
-        ctx.drawImage(seal, this.x, this.y)
-    },
-    move() {
-        this.x -= 2;
-    },
-}
+surfer.draw()
 
-const jelly = {
-    x: 725,
-    y: Math.floor(Math.random() * 100) + 225,
-    width: 50,
-    height: 50,
-    draw() {
-        const jellyfish = document.getElementById("jellyfish");
-        ctx.drawImage(jellyfish, this.x, this.y)
-    },
-    move() {
-        this.x -= 2;
-    },
-}
 
-const shark = {
-    x: 725,
-    y: Math.floor(Math.random() * 100) + 225,
-    width: 50,
-    height: 50,
-    draw() {
-        const shark = document.getElementById("shark");
-        ctx.drawImage(shark, this.x, this.y)
-    },
-    move() {
-        this.x -= 2;
-    },
-}
+// const swimmer = {
+//     x: 725,
+//     y: Math.floor(Math.random() * 100) + 225,
+//     width: 50,
+//     height: 50,
+    // draw() {
+    //     const swimmer = document.getElementById("swimmer");
+    //     ctx.drawImage(swimmer, this.x, this.y)
+    // },
+//     move() {
+//         this.x -= 2;
+//     },
+// }
+
+// const seal = {
+//     x: 725,
+//     y: Math.floor(Math.random() * 100) + 225,
+//     width: 50,
+//     height: 50,
+//     draw() {
+//         const seal = document.getElementById("seal");
+//         ctx.drawImage(seal, this.x, this.y)
+//     },
+//     move() {
+//         this.x -= 2;
+//     },
+// }
+
+// const jelly = {
+//     x: 725,
+//     y: Math.floor(Math.random() * 100) + 225,
+//     width: 50,
+//     height: 50,
+//     draw() {
+//         const jellyfish = document.getElementById("jellyfish");
+//         ctx.drawImage(jellyfish, this.x, this.y)
+//     },
+//     move() {
+//         this.x -= 2;
+//     },
+// }
+
+// const shark = {
+//     x: 725,
+//     y: Math.floor(Math.random() * 100) + 225,
+//     width: 50,
+//     height: 50,
+//     draw() {
+//         const shark = document.getElementById("shark");
+//         ctx.drawImage(shark, this.x, this.y)
+//     },
+//     move() {
+//         this.x -= 2;
+//     },
+// }
 
 //You gotta stow this away somewhere....
-let marineLife = [swimmer, seal, jelly, shark]
-let randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
+
 
 
 //FUNCTIONS
@@ -137,13 +184,16 @@ function animate() {
     clearCanvas();
     theWave.draw();
     surfer.draw();
+    for (i = 0; i < gamePlay.animals.length; i++){
+    	gamePlay.animals[i].draw()
+    };
     
     // game.drawAnimals()
 
-    randomAnimal.move()
-    randomAnimal.draw();
+    // randomAnimal.move()
+    // randomAnimal.draw();
 
-    surfer.checkCollision(randomAnimal);
+    // surfer.checkCollision(randomAnimal);
     window.requestAnimationFrame(animate)
 }
 
@@ -151,13 +201,14 @@ function animate() {
 const gamePlay = {
     time: 0,
     stokeLevel: 10,
-    animals: []
-
+    animals: [],
     start: function() {
         gamePlay.timer()
         theWave.draw();
         // alert('Ready To Get Amped?') //<======Temporary...should ultimately be a DOM element
         surfer.draw()
+        // this.drawAnimals()
+        // drawAnimals();
         //swimmer.draw()
         //animate() <==== Do this later...
     },
@@ -167,7 +218,12 @@ const gamePlay = {
             this.time++
             this.printStats();
 			const arbTime = Math.floor(Math.random() * 3 + 1)
+			if (this.time % arbTime === 0) {
+				const o = new Obstacle();
+    			gamePlay.animals.push(o)
+			}
 
+			
 			// generate new animal
 			// 
             // if (this.time % arbTime === 0) {
@@ -181,19 +237,28 @@ const gamePlay = {
     printStats: function() {
         const timer = document.getElementById("ride-time");
         timer.textContent = this.time
-    }
+    },
 
-    drawAnimals: function() {
+    // drawAnimals: function() {
 
-    }
+
+    // },
+
+        // const swimmer = document.getElementById("swimmer");
+        // ctx.drawImage(swimmer, this.x, this.y)
+  //   	let marineLife = [swimmer, seal, jelly, shark		// randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
+
+
 }
 
-gamePlay.start()
+		
+
+gamePlay.start();
 
 //LISTENERS
 document.addEventListener('keydown', (event) => {
     surfer.move(event.key)
-})
+});
 document.getElementById("animation").addEventListener('click', (event) => {
     animate()
-})
+});
