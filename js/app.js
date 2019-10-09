@@ -7,20 +7,27 @@ background.style.display = "none";
 
 //OBJECTS
 class Obstacle {
-	constructor(){
-	    const animalPossibilities = ["swimmer", "seal", "jelly", "shark"];
-	    this.id = animalPossibilities[Math.floor(Math.random() * animalPossibilities.length)];
-		this.x = 735;
-		this.y = Math.floor(Math.random() * 100) + 225;
-		this.width = 50;
-		this.height = 50;
-		this.move = this.x -= Math.floor(Math.random() * 3) +1;
-		this.draw = () => {
-			let image = document.getElementById(this.id)
-			ctx.drawImage(image, this.x, this.y);
-		}		
-	}
-};
+
+    constructor() {
+        const animalPossibilities = ["swimmer", "seal", "jelly", "shark"];
+        this.id = animalPossibilities[Math.floor(Math.random() * animalPossibilities.length)];
+        this.x = 735;
+        this.y = Math.floor(Math.random() * 100) + 225;
+        this.width = 50;
+        this.height = 50;
+        
+    }
+
+    draw() {
+    	let image = document.getElementById(this.id)
+        ctx.drawImage(image, this.x, this.y);
+    }
+
+    move() {
+    	this.x -= Math.floor(Math.random() * 3) + 1;
+    }
+
+}
 
 const theWave = {
     x: 0,
@@ -58,144 +65,30 @@ const surfer = {
     },
 
     checkCollision(randomAnimal) {
-        if ( 
+        if (
             this.x + this.width > randomAnimal.x &&
             this.x < randomAnimal.x + randomAnimal.width &&
             randomAnimal.y < this.y + this.height &&
             randomAnimal.y + randomAnimal.height > this.y
         ) {
             console.log("collision");
-<<<<<<< HEAD
-        //     return true
-        //     if(randomAnimal === swimmer){
-        //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
-        //     } else if (randomAnimal === seal){
-        //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
-        //     } else if (randomAnimal === shark){
-        //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
-        //     } else if (randomAnimal === jelly){
-        //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 3;
-        //     }
-        // } else return false;
-    	},
-	}
-}
-//surfer.draw()
-
-// SHOULD THIS BE AN OBSTACLE CLASS INSTEAD?
-const swimmer = {
-    x: 725,
-    y: Math.floor(Math.random() * 100) + 225,
-    width: 50,
-    height: 50,
-    draw() {
-        const swimmer = document.getElementById("swimmer");
-        ctx.drawImage(swimmer, this.x, this.y)
-    },
-    move() {
-        this.x -= 2;
-    },
-=======
             return true
-//         //     if(randomAnimal === swimmer){
-//         //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
-//         //     } else if (randomAnimal === seal){
-//         //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
-//         //     } else if (randomAnimal === shark){
-//         //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
-//         //     } else if (randomAnimal === jelly){
-//         //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 3;
-//         //     }
-//         // } else return false;
-    	}
-	}
->>>>>>> new-obstacle-class-branch-use-this-one
+        } else {
+            return false;
+        }
+    }
 }
 
-surfer.draw()
-
-
-// const swimmer = {
-//     x: 725,
-//     y: Math.floor(Math.random() * 100) + 225,
-//     width: 50,
-//     height: 50,
-    // draw() {
-    //     const swimmer = document.getElementById("swimmer");
-    //     ctx.drawImage(swimmer, this.x, this.y)
-    // },
-//     move() {
-//         this.x -= 2;
-//     },
-// }
-
-// const seal = {
-//     x: 725,
-//     y: Math.floor(Math.random() * 100) + 225,
-//     width: 50,
-//     height: 50,
-//     draw() {
-//         const seal = document.getElementById("seal");
-//         ctx.drawImage(seal, this.x, this.y)
-//     },
-//     move() {
-//         this.x -= 2;
-//     },
-// }
-
-// const jelly = {
-//     x: 725,
-//     y: Math.floor(Math.random() * 100) + 225,
-//     width: 50,
-//     height: 50,
-//     draw() {
-//         const jellyfish = document.getElementById("jellyfish");
-//         ctx.drawImage(jellyfish, this.x, this.y)
-//     },
-//     move() {
-//         this.x -= 2;
-//     },
-// }
-
-// const shark = {
-//     x: 725,
-//     y: Math.floor(Math.random() * 100) + 225,
-//     width: 50,
-//     height: 50,
-//     draw() {
-//         const shark = document.getElementById("shark");
-//         ctx.drawImage(shark, this.x, this.y)
-//     },
-//     move() {
-//         this.x -= 2;
-//     },
-// }
-
-//You gotta stow this away somewhere....
-
-
-
-//FUNCTIONS
-function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.height, canvas.width)
-}
-
-function animate() {
-    clearCanvas();
-    theWave.draw();
-    surfer.draw();
-    for (i = 0; i < gamePlay.animals.length; i++){
-    	gamePlay.animals[i].draw()
-    };
-    
-    // game.drawAnimals()
-
-    // randomAnimal.move()
-    // randomAnimal.draw();
-
-    // surfer.checkCollision(randomAnimal);
-    window.requestAnimationFrame(animate)
-}
+//Collision stuff...
+//     if(randomAnimal === swimmer){
+//     	gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
+//     } else if (randomAnimal === seal){
+//     	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
+//     } else if (randomAnimal === shark){
+//     	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
+//     } else if (randomAnimal === jelly){
+//     	gamePlay.stokeLevel = gamePlay.stokeLevel - 3;
+//surfer.draw()
 
 //GAMEPLAY OBJECT
 const gamePlay = {
@@ -205,31 +98,21 @@ const gamePlay = {
     start: function() {
         gamePlay.timer()
         theWave.draw();
-        // alert('Ready To Get Amped?') //<======Temporary...should ultimately be a DOM element
+        // alert('Ready To Get Amped?') //<======Temporary...should be a DOM element soon
         surfer.draw()
-        // this.drawAnimals()
-        // drawAnimals();
-        //swimmer.draw()
-        //animate() <==== Do this later...
+        // animate() <==== Do this later...
     },
 
     timer: function() {
         const rideTime = setInterval(() => {
             this.time++
             this.printStats();
-			const arbTime = Math.floor(Math.random() * 3 + 1)
-			if (this.time % arbTime === 0) {
-				const o = new Obstacle();
-    			gamePlay.animals.push(o)
-			}
 
-			
-			// generate new animal
-			// 
-            // if (this.time % arbTime === 0) {
-            //     randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
+            // const arbTime = Math.floor(Math.random() * 3 + 1)
+            // if (this.time % 5 === 0) {
+                const o = new Obstacle();
+                gamePlay.animals.push(o)
             // }
-
 
         }, 1000);
     },
@@ -239,19 +122,36 @@ const gamePlay = {
         timer.textContent = this.time
     },
 
-    // drawAnimals: function() {
+    drawAnimals: function() {
+	    for (let i = 0; i < this.animals.length; i++) {
+    		this.animals[i].draw();
+	    }
+    },
 
+    moveAnimals: function(){
+    	for (let i = 0; i < this.animals.length; i++) {
+    		this.animals[i].move();
+    	}	
 
-    // },
-
-        // const swimmer = document.getElementById("swimmer");
-        // ctx.drawImage(swimmer, this.x, this.y)
-  //   	let marineLife = [swimmer, seal, jelly, shark		// randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
-
-
+    // gamePlay.animals[1].move()
+	}
 }
 
-		
+function animate() {
+    gamePlay.moveAnimals()
+    clearCanvas();
+    theWave.draw();
+    surfer.draw();
+    gamePlay.drawAnimals()
+    // surfer.checkCollision(randomAnimal);
+    window.requestAnimationFrame(animate)
+}
+
+function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.height, canvas.width)
+}
+
+
 
 gamePlay.start();
 
