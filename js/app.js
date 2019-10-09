@@ -14,7 +14,6 @@ const theWave = {
         ctx.drawImage(image, this.x, this.y)
     }
 }
-// theWave.draw()
 
 const surfer = {
     x: 50,
@@ -40,7 +39,6 @@ const surfer = {
         if (direction == "ArrowRight" && this.x < 620) {
             this.x += this.speed;
         }
-        clearCanvas()
     },
 
     checkCollision(randomAnimal) {
@@ -53,6 +51,15 @@ const surfer = {
         ) {
             console.log("collision");
             return true
+            if(randomAnimal === swimmer){
+            	gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
+            } else if (randomAnimal === seal){
+            	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
+            } else if (randomAnimal === shark){
+            	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
+            } else if (randomAnimal === jelly){
+            	gamePlay.stokeLevel = gamePlay.stokeLevel - 3;
+            }
         } else return false;
     },
 }
@@ -64,14 +71,12 @@ const swimmer = {
     y: Math.floor(Math.random() * 100) + 225,
     width: 50,
     height: 50,
-    // r: 50, <== Is this needed??  Possibly for collision?
     draw() {
         const swimmer = document.getElementById("swimmer");
         ctx.drawImage(swimmer, this.x, this.y)
     },
     move() {
         this.x -= 2;
-        clearCanvas()
     },
 }
 
@@ -80,14 +85,12 @@ const seal = {
     y: Math.floor(Math.random() * 100) + 225,
     width: 50,
     height: 50,
-    // r: 50, <== Is this needed??  Possibly for collision?
     draw() {
         const seal = document.getElementById("seal");
         ctx.drawImage(seal, this.x, this.y)
     },
     move() {
         this.x -= 2;
-        clearCanvas()
     },
 }
 
@@ -96,14 +99,12 @@ const jelly = {
     y: Math.floor(Math.random() * 100) + 225,
     width: 50,
     height: 50,
-    // r: 50, <== Is this needed??  Possibly for collision?
     draw() {
         const jellyfish = document.getElementById("jellyfish");
         ctx.drawImage(jellyfish, this.x, this.y)
     },
     move() {
         this.x -= 2;
-        clearCanvas()
     },
 }
 
@@ -112,14 +113,12 @@ const shark = {
     y: Math.floor(Math.random() * 100) + 225,
     width: 50,
     height: 50,
-    // r: 50, <== Is this needed??  Possibly for collision?
     draw() {
         const shark = document.getElementById("shark");
         ctx.drawImage(shark, this.x, this.y)
     },
     move() {
         this.x -= 2;
-        clearCanvas()
     },
 }
 
@@ -131,23 +130,24 @@ let randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
 //FUNCTIONS
 function clearCanvas() {
     ctx.clearRect(0, 0, canvas.height, canvas.width)
-    theWave.draw();
-    surfer.draw();
-    randomAnimal.draw();
 }
 
 function animate() {
-    randomAnimal.move()
-    surfer.checkCollision(randomAnimal);
     clearCanvas();
+    randomAnimal.move()
+    theWave.draw();
+    surfer.draw();
+    randomAnimal.draw();
+    surfer.checkCollision(randomAnimal);
     window.requestAnimationFrame(animate)
 }
 
 //GAMEPLAY OBJECT
 const gamePlay = {
     time: 0,
+    stokeLevel: 10,
     start: function() {
-        console.log(gamePlay.timer());
+        gamePlay.timer()
         theWave.draw();
         alert('Ready To Get Amped?') //<======Temporary...should ultimately be a DOM element
         surfer.draw()
@@ -161,10 +161,7 @@ const gamePlay = {
             this.printStats();
 			const arbTime = Math.floor(Math.random() * 3 + 1)
             if (this.time % arbTime === 0) {
-                marineLife = [swimmer, seal, jelly, shark]
                 randomAnimal = marineLife[Math.floor(Math.random() * marineLife.length)]
-                randomAnimal.draw()
-                randomAnimal.move()
             }
         }, 1000);
     },
@@ -181,8 +178,8 @@ gamePlay.start()
 
 //LISTENERS
 document.addEventListener('keydown', (event) => {
-        surfer.move(event.key)
-    })
+    surfer.move(event.key)
+})
 document.getElementById("animation").addEventListener('click', (event) => {
-        animate()
-    })
+    animate()
+})
