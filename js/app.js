@@ -7,12 +7,18 @@ background.style.display = "none";
 
 //OBJECTS
 class Obstacle {
-	constructor(draw){
+	constructor(){
+	    const animalPossibilities = ["surfer", "swimmer", "seal", "jelly", "shark"]
+	    this.id = animalPossibilities[Math.floor(Math.random() * animalPossibilities.length)]
 		this.x = 735;
 		this.y = Math.floor(Math.random() * 100) + 225;
 		this.width = 50;
 		this.height = 50;
 		this.move = this.x -= Math.floor(Math.random() * 3) +1;
+		this.draw = () => {
+			let image = document.getElementByID("this.id")
+			ctx.drawImage(image, this.x, this.y)
+		}		
 	}
 };
 
@@ -149,8 +155,8 @@ function animate() {
     
     // game.drawAnimals()
 
-    randomAnimal.move()
-    randomAnimal.draw();
+    // randomAnimal.move()
+    // randomAnimal.draw();
 
     surfer.checkCollision(randomAnimal);
     window.requestAnimationFrame(animate)
@@ -166,7 +172,7 @@ const gamePlay = {
         theWave.draw();
         alert('Ready To Get Amped?') //<======Temporary...should ultimately be a DOM element
         surfer.draw()
-        this.drawAnimals()
+        // this.drawAnimals()
         // drawAnimals();
         //swimmer.draw()
         //animate() <==== Do this later...
@@ -177,7 +183,12 @@ const gamePlay = {
             this.time++
             this.printStats();
 			const arbTime = Math.floor(Math.random() * 3 + 1)
+			if (this.time % arbTime === 0) {
+				const o = new Obstacle();
+    			gamePlay.animals.push(o)
+			}
 
+			
 			// generate new animal
 			// 
             // if (this.time % arbTime === 0) {
@@ -194,14 +205,13 @@ const gamePlay = {
     },
 
     drawAnimals: function() {
-    	const swimmer = new Obstacle;
-    	gamePlay.animals.push(swimmer)
-    	const seal = new Obstacle;
-    	gamePlay.animals.push(seal)
-    	const jelly = new Obstacle;
-    	gamePlay.animals.push(jelly)
-    	const shark = new Obstacle;
-    	gamePlay.animals.push(shark)
+
+    	// const seal = new Obstacle;
+    	// gamePlay.animals.push(seal)
+    	// const jelly = new Obstacle;
+    	// gamePlay.animals.push(jelly)
+    	// const shark = new Obstacle;
+    	// gamePlay.animals.push(shark)
     },
 
         // const swimmer = document.getElementById("swimmer");
