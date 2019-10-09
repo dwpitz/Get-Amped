@@ -61,7 +61,8 @@ const surfer = {
         //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 3;
         //     }
         // } else return false;
-    },
+    	},
+	}
 }
 //surfer.draw()
 
@@ -155,7 +156,7 @@ const gamePlay = {
     start: function() {
         gamePlay.timer()
         theWave.draw();
-        alert('Ready To Get Amped?') //<======Temporary...should ultimately be a DOM element
+        // alert('Ready To Get Amped?') //<======Temporary...should ultimately be a DOM element
         surfer.draw()
         //swimmer.draw()
         //animate() <==== Do this later...
