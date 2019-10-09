@@ -48,24 +48,36 @@ const surfer = {
             this.x < randomAnimal.x + randomAnimal.width &&
             randomAnimal.y < this.y + this.height &&
             randomAnimal.y + randomAnimal.height > this.y
-        ) {
-            console.log("collision");
-        //     return true
-        //     if(randomAnimal === swimmer){
-        //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
-        //     } else if (randomAnimal === seal){
-        //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
-        //     } else if (randomAnimal === shark){
-        //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
-        //     } else if (randomAnimal === jelly){
-        //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 3;
-        //     }
-        // } else return false;
-    },
-}
+//         ) {
+//             console.log("collision");
+//         //     return true
+//         //     if(randomAnimal === swimmer){
+//         //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
+//         //     } else if (randomAnimal === seal){
+//         //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
+//         //     } else if (randomAnimal === shark){
+//         //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
+//         //     } else if (randomAnimal === jelly){
+//         //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 3;
+//         //     }
+//         // } else return false;
+//     },
+// }
 //surfer.draw()
 
-// SHOULD THIS BE AN OBSTACLE CLASS INSTEAD?
+
+class Obstacle {
+	constructor(){
+		x = 735;
+		y = Math.floor(Math.random() * 100) + 225;
+		width = 50;
+		height = 50;
+		move() {
+			this.x -= Math.floor(Math.random() * 3) +1;
+		}
+	}
+}
+
 const swimmer = {
     x: 725,
     y: Math.floor(Math.random() * 100) + 225,
