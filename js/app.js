@@ -8,16 +8,16 @@ background.style.display = "none";
 //OBJECTS
 class Obstacle {
 	constructor(){
-	    const animalPossibilities = ["surfer", "swimmer", "seal", "jelly", "shark"]
-	    this.id = animalPossibilities[Math.floor(Math.random() * animalPossibilities.length)]
+	    const animalPossibilities = ["swimmer", "seal", "jelly", "shark"];
+	    this.id = animalPossibilities[Math.floor(Math.random() * animalPossibilities.length)];
 		this.x = 735;
 		this.y = Math.floor(Math.random() * 100) + 225;
 		this.width = 50;
 		this.height = 50;
 		this.move = this.x -= Math.floor(Math.random() * 3) +1;
 		this.draw = () => {
-			let image = document.getElementByID("this.id")
-			ctx.drawImage(image, this.x, this.y)
+			let image = document.getElementById(this.id)
+			ctx.drawImage(image, this.x, this.y);
 		}		
 	}
 };
@@ -152,13 +152,16 @@ function animate() {
     clearCanvas();
     theWave.draw();
     surfer.draw();
+    for (i = 0; i < gamePlay.animals.length; i++){
+    	gamePlay.animals[i].draw()
+    };
     
     // game.drawAnimals()
 
     // randomAnimal.move()
     // randomAnimal.draw();
 
-    surfer.checkCollision(randomAnimal);
+    // surfer.checkCollision(randomAnimal);
     window.requestAnimationFrame(animate)
 }
 
@@ -204,15 +207,10 @@ const gamePlay = {
         timer.textContent = this.time
     },
 
-    drawAnimals: function() {
+    // drawAnimals: function() {
 
-    	// const seal = new Obstacle;
-    	// gamePlay.animals.push(seal)
-    	// const jelly = new Obstacle;
-    	// gamePlay.animals.push(jelly)
-    	// const shark = new Obstacle;
-    	// gamePlay.animals.push(shark)
-    },
+
+    // },
 
         // const swimmer = document.getElementById("swimmer");
         // ctx.drawImage(swimmer, this.x, this.y)
