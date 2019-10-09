@@ -64,12 +64,14 @@ const surfer = {
         }
     },
 
-    checkCollision(Obstacle) {
+    checkCollision() {
+    	for (let i = 0; i < gamePlay.animals.length; i++) {
+    		let collide = gamePlay.animals[i]
         if (
-            this.x + this.width > Obstacle.x &&
-            this.x < Obstacle.x + Obstacle.width &&
-            Obstacle.y < this.y + this.height &&
-            Obstacle.y + Obstacle.height > this.y
+            this.x + this.width > collide.x &&
+            this.x < collide.x + collide.width &&
+            collide.y < this.y + this.height &&
+            collide.y + collide.height > this.y
         ) {
             console.log("collision");
             return true
@@ -77,6 +79,7 @@ const surfer = {
             return false;
         }
     }
+}
 }
 
 //Collision stuff...
@@ -141,7 +144,7 @@ function animate() {
     theWave.draw();
     surfer.draw();
     gamePlay.drawAnimals()
-    surfer.checkCollision(Obstacle);
+    surfer.checkCollision();
     window.requestAnimationFrame(animate)
 }
 
