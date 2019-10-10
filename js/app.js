@@ -14,16 +14,16 @@ class Obstacle {
         this.x = 735;
         this.y = Math.floor(Math.random() * 100) + 225;
         this.width = 50;
-        this.height = 50;  
+        this.height = 50;
     }
 
     draw() {
-    	let image = document.getElementById(this.type)
+        let image = document.getElementById(this.type)
         ctx.drawImage(image, this.x, this.y);
     }
 
     move() {
-    	this.x -= Math.floor(Math.random() * 3) + 1;
+        this.x -= Math.floor(Math.random() * 3) + 1;
     }
 
 }
@@ -65,53 +65,46 @@ const surfer = {
     },
 
     checkCollision() {
+        //This will work unless surfer collides with 2 animals at the exact same instant  
+        let index = null
+        for (let i = 0; i < gamePlay.animals.length; i++) {
+            let collide = gamePlay.animals[i];
+            if (
+                this.x + this.width > collide.x &&
+                this.x < collide.x + collide.width &&
+                collide.y < this.y + this.height &&
+                collide.y + collide.height > this.y
+            ) {
+                console.log("Collision!")
+                index = i
+                console.log(index)
+                break;
 
-    	// to delete
-    	
-   		//This will work unless surfer collides with 2 animals at the exact same instant  
-    	let index = null
-    	for (let i = 0; i < gamePlay.animals.length; i++) {
-    		let collide = gamePlay.animals[i];
-    		if (
-	            this.x + this.width > collide.x &&
-	            this.x < collide.x + collide.width &&
-	            collide.y < this.y + this.height &&
-	            collide.y + collide.height > this.y
-	        ) { 
-	        	console.log("Collision!")
-	        	index = i
-    			console.log(index)
-				break;
-				
-	        }
+            }
 
-    	}
-    	
-    	this.index = index
-    	// console.log(this.index);
-    	// if(gamePlay.animals[this.index]) {
-    	// 	console.log(gamePlay.animals[this.index].type);
-    	// }
-    	if(index !== null && gamePlay.animals[this.index].type === "swimmer"){
-    		gamePlay.stokeLevel = gamePlay.stokeLevel - 1;
-    		console.log(gamePlay.stokeLevel)
-    	}
-    	if(index !== null && gamePlay.animals[this.index].type === "seal"){
-    		gamePlay.stokeLevel = gamePlay.stokeLevel - 3;
-    		console.log(gamePlay.stokeLevel)
-    	}
-    	if(index !== null && gamePlay.animals[this.index].type === "jelly"){
-    		gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
-    		console.log(gamePlay.stokeLevel)
-    	}
-    	if(index !== null && gamePlay.animals[this.index].type === "shark"){
-    		gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
-    		console.log(gamePlay.stokeLevel)
-    	}
-    	if(index !== null){
-    		gamePlay.animals.splice(index, 1)
-    	}
-	}
+        }
+
+        this.index = index
+        if (index !== null && gamePlay.animals[this.index].type === "swimmer") {
+            gamePlay.stokeLevel = gamePlay.stokeLevel - 1;
+            console.log(gamePlay.stokeLevel)
+        }
+        if (index !== null && gamePlay.animals[this.index].type === "seal") {
+            gamePlay.stokeLevel = gamePlay.stokeLevel - 3;
+            console.log(gamePlay.stokeLevel)
+        }
+        if (index !== null && gamePlay.animals[this.index].type === "jelly") {
+            gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
+            console.log(gamePlay.stokeLevel)
+        }
+        if (index !== null && gamePlay.animals[this.index].type === "shark") {
+            gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
+            console.log(gamePlay.stokeLevel)
+        }
+        if (index !== null) {
+            gamePlay.animals.splice(index, 1)
+        }
+    }
 }
 
 theWave.draw();
@@ -125,7 +118,7 @@ const gamePlay = {
         theWave.draw();
         // alert('Ready To Get Amped?') //<======Temporary...should be a DOM element soon
         surfer.draw()
-        // animate() <==== Do this later...
+        // animate() //<==== Do this later...
     },
 
     timer: function() {
@@ -137,7 +130,19 @@ const gamePlay = {
             if (this.time % 2 === 0) {
                 const o = new Obstacle();
                 gamePlay.animals.push(o)
-			}
+            }
+
+            if (this.time % 10 === 0){
+            	this.stokeLevel++
+            	this.printStats();
+            }
+
+            if (this.stokeLevel <= 0) {
+    			console.log('You LOSE');
+    	}
+    		if(this.stokeLevel >= 15) {
+    			console.log('You WIN')
+    	}
 
         }, 1000);
     },
@@ -150,21 +155,30 @@ const gamePlay = {
     },
 
     drawAnimals: function() {
-	    for (let i = 0; i < this.animals.length; i++) {
-    		this.animals[i].draw();
-	    }
+        for (let i = 0; i < this.animals.length; i++) {
+            this.animals[i].draw();
+        }
     },
 
-    moveAnimals: function(){
-    	for (let i = 0; i < this.animals.length; i++) {
-    		this.animals[i].move();
-    	}	
-	}
+    moveAnimals: function() {
+        for (let i = 0; i < this.animals.length; i++) {
+            this.animals[i].move();
+        }
+    },
+
+    winCondition: function(){
+    	// if (this.stokeLevel === 0) {
+    	// 	console.log('You LOSE');
+    	// }
+    	// if(this.stokeLevel === 20) {
+    	// 	console.log('You WIN')
+    	// }
+    }
 }
 
 function animate() {
-	//surfer.checkCollision();
-    gamePlay.moveAnimals()	
+    //surfer.checkCollision();
+    gamePlay.moveAnimals()
     clearCanvas();
     theWave.draw();
     surfer.draw();
@@ -183,6 +197,6 @@ document.addEventListener('keydown', (event) => {
     surfer.move(event.key)
 });
 document.getElementById("animation").addEventListener('click', (event) => {
-	gamePlay.start();
+    gamePlay.start();
     animate()
 });
