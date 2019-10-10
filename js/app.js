@@ -64,29 +64,31 @@ const surfer = {
     },
 
     checkCollision() {
-    	//This will only iterate through the 1st object in the array over and over.  
+
+    	// to delete
+
+    	//This will work unless surfer collides with 2 animals at the exact same instant  
     	for (let i = 0; i < gamePlay.animals.length; i++) {
     		let collide = gamePlay.animals[i];
-    		console.log(collide)
-    	
+    		if (i === 20){
+    			break;
+    		}
 
-        if (
-            this.x + this.width > collide.x &&
-            this.x < collide.x + collide.width &&
-            collide.y < this.y + this.height &&
-            collide.y + collide.height > this.y
-        ) {
-            console.log("collision");
-            return true
-        } else {
-            return false;
-        }
+	        if (
+	            this.x + this.width > collide.x &&
+	            this.x < collide.x + collide.width &&
+	            collide.y < this.y + this.height &&
+	            collide.y + collide.height > this.y
+	        ) {
+	            console.log("collision");
+	            return true; // break;
+	        } 
     	}
 
-
-
-
-}
+    	// delete if nec
+    		// point stuff
+    		// return 
+	}
 }
 
 //Collision stuff...
