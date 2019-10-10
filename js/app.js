@@ -93,10 +93,18 @@ const surfer = {
     	// 	console.log(gamePlay.animals[this.index].type);
     	// }
     	if(index !== null && gamePlay.animals[this.index].type === "swimmer"){
-    		gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
+    		gamePlay.stokeLevel = gamePlay.stokeLevel - 1;
     		console.log(gamePlay.stokeLevel)
     	}
     	if(index !== null && gamePlay.animals[this.index].type === "seal"){
+    		gamePlay.stokeLevel = gamePlay.stokeLevel - 3;
+    		console.log(gamePlay.stokeLevel)
+    	}
+    	if(index !== null && gamePlay.animals[this.index].type === "jelly"){
+    		gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
+    		console.log(gamePlay.stokeLevel)
+    	}
+    	if(index !== null && gamePlay.animals[this.index].type === "shark"){
     		gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
     		console.log(gamePlay.stokeLevel)
     	}
@@ -106,16 +114,6 @@ const surfer = {
 	}
 }
 
-//Collision stuff...
-//     if(randomAnimal === swimmer){
-//     	gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
-//     } else if (randomAnimal === seal){
-//     	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
-//     } else if (randomAnimal === shark){
-//     	gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
-//     } else if (randomAnimal === jelly){
-//     	gamePlay.stokeLevel = gamePlay.stokeLevel - 3;
-//surfer.draw()
 theWave.draw();
 //GAMEPLAY OBJECT
 const gamePlay = {
