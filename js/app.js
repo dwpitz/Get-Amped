@@ -70,7 +70,7 @@ const surfer = {
     	//This will work unless surfer collides with 2 animals at the exact same instant  
     	for (let i = 0; i < gamePlay.animals.length; i++) {
     		let collide = gamePlay.animals[i];
-    		if (i === 20){
+    		if (i === 3){
     			break;
     		}
 
