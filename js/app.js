@@ -43,6 +43,7 @@ const surfer = {
     width: 50,
     height: 50,
     speed: 20,
+    index: null,
     draw() {
         let surfDude = document.getElementById("surfer");
         ctx.drawImage(surfDude, this.x, this.y)
@@ -66,8 +67,7 @@ const surfer = {
     checkCollision() {
 
     	// to delete
-    	let index = null;
-
+    	
    		//This will work unless surfer collides with 2 animals at the exact same instant  
     	for (let i = 0; i < gamePlay.animals.length; i++) {
     		let collide = gamePlay.animals[i];
@@ -78,20 +78,21 @@ const surfer = {
 	            collide.y + collide.height > this.y
 	        ) { 
 	        	console.log("Collision!")
-	        	index = i
-	        	// gamePlay.animals.splice(0)	<==== Just playing around with this....
+	        	surfer.index = i
+    			console.log(surfer.index)
 				break;
 				
 	        }
 
     	}
-
-    	// delete if nec
-    	if(index !== null){
-    		gamePlay.animals.splice(index, 1)
-    		// point stuff
-    		
+    	
+    	if(surfer.index !== null){
+    		gamePlay.animals.splice(surfer.index, 1)
     	}
+    	// if(surfer.index !== null && gamePlay.animals[surfer.index].id === "swimmer"){
+    	// 	gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
+    	// 	console.log(gamePlay.stokeLevel)
+    	// }
 	}
 }
 
@@ -136,6 +137,8 @@ const gamePlay = {
     printStats: function() {
         const timer = document.getElementById("ride-time");
         timer.textContent = this.time
+        const stokeLevel = document.getElementById("stoke-level");
+        stokeLevel.textContent = (`Stoke Level:  ${this.stokeLevel}`)
     },
 
     drawAnimals: function() {
