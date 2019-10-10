@@ -42,7 +42,7 @@ const surfer = {
     y: 200,
     width: 50,
     height: 50,
-    speed: 20,
+    speed: 50,
     index: null,
     draw() {
         let surfDude = document.getElementById("surfer");
@@ -139,6 +139,10 @@ const gamePlay = {
 
             if (this.stokeLevel <= 0) {
     			console.log('You LOSE');
+    			
+    			// document.getElementById("my-canvas").src = "https://media.giphy.com/media/2FSr2rzHyCvUA/giphy.mp4"
+
+
     	}
     		if(this.stokeLevel >= 15) {
     			console.log('You WIN')
@@ -165,15 +169,6 @@ const gamePlay = {
             this.animals[i].move();
         }
     },
-
-    winCondition: function(){
-    	// if (this.stokeLevel === 0) {
-    	// 	console.log('You LOSE');
-    	// }
-    	// if(this.stokeLevel === 20) {
-    	// 	console.log('You WIN')
-    	// }
-    }
 }
 
 function animate() {
