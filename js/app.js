@@ -14,8 +14,7 @@ class Obstacle {
         this.x = 735;
         this.y = Math.floor(Math.random() * 100) + 225;
         this.width = 50;
-        this.height = 50;
-        
+        this.height = 50;  
     }
 
     draw() {
@@ -65,8 +64,12 @@ const surfer = {
     },
 
     checkCollision() {
+    	//This will only iterate through the 1st object in the array over and over.  
     	for (let i = 0; i < gamePlay.animals.length; i++) {
-    		let collide = gamePlay.animals[i]
+    		let collide = gamePlay.animals[i];
+    		console.log(collide)
+    	
+
         if (
             this.x + this.width > collide.x &&
             this.x < collide.x + collide.width &&
@@ -78,7 +81,11 @@ const surfer = {
         } else {
             return false;
         }
-    }
+    	}
+
+
+
+
 }
 }
 
@@ -112,10 +119,10 @@ const gamePlay = {
             this.printStats();
 
             // const arbTime = Math.floor(Math.random() * 3 + 1)
-            // if (this.time % 5 === 0) {
+            if (this.time % 2 === 0) {
                 const o = new Obstacle();
                 gamePlay.animals.push(o)
-            // }
+			}
 
         }, 1000);
     },
@@ -139,7 +146,8 @@ const gamePlay = {
 }
 
 function animate() {
-    gamePlay.moveAnimals()
+	//surfer.checkCollision();
+    gamePlay.moveAnimals()	
     clearCanvas();
     theWave.draw();
     surfer.draw();
