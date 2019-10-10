@@ -66,8 +66,9 @@ const surfer = {
     checkCollision() {
 
     	// to delete
+    	let index = null;
 
-    	//This will work unless surfer collides with 2 animals at the exact same instant  
+   		//This will work unless surfer collides with 2 animals at the exact same instant  
     	for (let i = 0; i < gamePlay.animals.length; i++) {
     		let collide = gamePlay.animals[i];
     		if (
@@ -75,21 +76,22 @@ const surfer = {
 	            this.x < collide.x + collide.width &&
 	            collide.y < this.y + this.height &&
 	            collide.y + collide.height > this.y
-	        ) {
-	            console.log("collision");
-	        	gamePlay.animals.splice(0,1)
-	            return true;
-	        } 
-	     //    if (i === 1){
-    		// 	break;
-    		// 	gamePlay.animals.splice(0,4)
-    		// }
+	        ) { 
+	        	console.log("Collision!")
+	        	index = i
+	        	// gamePlay.animals.splice(0)	<==== Just playing around with this....
+				break;
+				
+	        }
+
     	}
-    	console.log(gamePlay.animals)
 
     	// delete if nec
+    	if(index !== null){
+    		gamePlay.animals.splice(index, 1)
     		// point stuff
-    		// return 
+    		
+    	}
 	}
 }
 
@@ -103,7 +105,7 @@ const surfer = {
 //     } else if (randomAnimal === jelly){
 //     	gamePlay.stokeLevel = gamePlay.stokeLevel - 3;
 //surfer.draw()
-
+theWave.draw();
 //GAMEPLAY OBJECT
 const gamePlay = {
     time: 0,
@@ -164,12 +166,12 @@ function clearCanvas() {
     ctx.clearRect(0, 0, canvas.height, canvas.width)
 }
 
-gamePlay.start();
 
 //LISTENERS
 document.addEventListener('keydown', (event) => {
     surfer.move(event.key)
 });
 document.getElementById("animation").addEventListener('click', (event) => {
+	gamePlay.start();
     animate()
 });
