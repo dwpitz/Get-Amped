@@ -10,7 +10,7 @@ class Obstacle {
 
     constructor() {
         const animalPossibilities = ["swimmer", "seal", "jelly", "shark"];
-        this.id = animalPossibilities[Math.floor(Math.random() * animalPossibilities.length)];
+        this.type = animalPossibilities[Math.floor(Math.random() * animalPossibilities.length)];
         this.x = 735;
         this.y = Math.floor(Math.random() * 100) + 225;
         this.width = 50;
@@ -18,7 +18,7 @@ class Obstacle {
     }
 
     draw() {
-    	let image = document.getElementById(this.id)
+    	let image = document.getElementById(this.type)
         ctx.drawImage(image, this.x, this.y);
     }
 
@@ -69,6 +69,7 @@ const surfer = {
     	// to delete
     	
    		//This will work unless surfer collides with 2 animals at the exact same instant  
+    	let index = null
     	for (let i = 0; i < gamePlay.animals.length; i++) {
     		let collide = gamePlay.animals[i];
     		if (
@@ -78,21 +79,30 @@ const surfer = {
 	            collide.y + collide.height > this.y
 	        ) { 
 	        	console.log("Collision!")
-	        	surfer.index = i
-    			console.log(surfer.index)
+	        	index = i
+    			console.log(index)
 				break;
 				
 	        }
 
     	}
     	
-    	if(surfer.index !== null){
-    		gamePlay.animals.splice(surfer.index, 1)
-    	}
-    	// if(surfer.index !== null && gamePlay.animals[surfer.index].id === "swimmer"){
-    	// 	gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
-    	// 	console.log(gamePlay.stokeLevel)
+    	this.index = index
+    	// console.log(this.index);
+    	// if(gamePlay.animals[this.index]) {
+    	// 	console.log(gamePlay.animals[this.index].type);
     	// }
+    	if(index !== null && gamePlay.animals[this.index].type === "swimmer"){
+    		gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
+    		console.log(gamePlay.stokeLevel)
+    	}
+    	if(index !== null && gamePlay.animals[this.index].type === "seal"){
+    		gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
+    		console.log(gamePlay.stokeLevel)
+    	}
+    	if(index !== null){
+    		gamePlay.animals.splice(index, 1)
+    	}
 	}
 }
 
