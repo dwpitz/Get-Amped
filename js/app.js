@@ -108,15 +108,19 @@ const surfer = {
 }
 
 theWave.draw();
+
 //GAMEPLAY OBJECT
 const gamePlay = {
     time: 0,
     stokeLevel: 10,
     animals: [],
     start: function() {
+    	theWave.draw();
+    	// gamePlay.start();
+    	alert('Ready To Get Amped?') //<======Temporary...should be a DOM element soon
+    	animate()
         gamePlay.timer()
         theWave.draw();
-        // alert('Ready To Get Amped?') //<======Temporary...should be a DOM element soon
         surfer.draw()
         // animate() //<==== Do this later...
     },
@@ -139,13 +143,13 @@ const gamePlay = {
 
             if (this.stokeLevel <= 0) {
     			console.log('You LOSE');
-    			
+    			alert("TOTAL WIPEOUT, DUDE. ")
     			// document.getElementById("my-canvas").src = "https://media.giphy.com/media/2FSr2rzHyCvUA/giphy.mp4"
 
 
     	}
     		if(this.stokeLevel >= 15) {
-    			console.log('You WIN')
+    			alert("YOU WIN! SO SO STOKED!!")
     	}
 
         }, 1000);
@@ -191,7 +195,8 @@ function clearCanvas() {
 document.addEventListener('keydown', (event) => {
     surfer.move(event.key)
 });
-document.getElementById("animation").addEventListener('click', (event) => {
-    gamePlay.start();
-    animate()
-});
+// document.getElementById("animation").addEventListener('click', (event) => {
+//     gamePlay.start();
+//     animate()
+// });
+gamePlay.start();
