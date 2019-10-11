@@ -197,7 +197,7 @@ function clearCanvas() {
 }
 
 function callModal(){
-var modal = document.getElementById("myModal");
+let modal = document.getElementById("myModal");
 let span = document.getElementsByClassName("close")[0];
     modal.style.display = "block";
 span.onclick = function() {
@@ -215,4 +215,13 @@ window.onclick = function(event) {
 document.addEventListener('keydown', (event) => {
     surfer.move(event.key)
 });
+
+document.getElementById("myBtn").addEventListener('click', (event) => {
+   gamePlay.time = 0;
+   gamePlay.stokeLevel = 10;
+   let modal = document.getElementById("myModal");
+   modal.style.display = "none";
+   gamePlay.start();
+
+})
 gamePlay.start();
