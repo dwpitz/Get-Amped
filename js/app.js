@@ -12,7 +12,7 @@ class Obstacle {
         const animalPossibilities = ["swimmer", "seal", "jelly", "shark"];
         this.type = animalPossibilities[Math.floor(Math.random() * animalPossibilities.length)];
         this.x = 735;
-        this.y = Math.floor(Math.random() * 100) + 225;
+        this.y = Math.floor(Math.random() * 250) + 100;
         this.width = 50;
         this.height = 50;
     }
@@ -23,7 +23,7 @@ class Obstacle {
     }
 
     move() {
-        this.x -= Math.floor(Math.random() * 3) + 1;
+        this.x -= Math.floor(Math.random() * 10) + 7;
     }
 
 }
@@ -39,7 +39,7 @@ const theWave = {
 
 const surfer = {
     x: 50,
-    y: 200,
+    y: 150,
     width: 50,
     height: 50,
     speed: 50,
@@ -50,10 +50,10 @@ const surfer = {
     },
 
     move(direction) {
-        if (direction == "ArrowDown" && this.y < 319) {
+        if (direction == "ArrowDown" && this.y < 315) {
             this.y += this.speed;
         }
-        if (direction == "ArrowUp" && this.y > 135) {
+        if (direction == "ArrowUp" && this.y > 70) {
             this.y -= this.speed;
         }
         if (direction == "ArrowLeft" && this.x > 5) {
@@ -131,10 +131,10 @@ const gamePlay = {
             this.printStats();
 
             // const arbTime = Math.floor(Math.random() * 3 + 1)
-            if (this.time % 2 === 0) {
+            // if (this.time %  === 0) {
                 const o = new Obstacle();
                 gamePlay.animals.push(o)
-            }
+            // }
 
             if (this.time % 10 === 0){
             	this.stokeLevel++
