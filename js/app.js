@@ -5,7 +5,6 @@ document.getElementById("seal").style.visibility = "hidden";
 document.getElementById("jelly").style.visibility = "hidden";
 document.getElementById("shark").style.visibility = "hidden";
 
-
 const canvas = document.getElementById('my-canvas')
 console.log(canvas);
 const ctx = canvas.getContext('2d');
@@ -55,10 +54,10 @@ const surfer = {
     },
 
     move(direction) {
-        if (direction == "ArrowDown" && this.y < 315) {
+        if (direction == "ArrowDown" && this.y < 300) {
             this.y += this.speed;
         }
-        if (direction == "ArrowUp" && this.y > 70) {
+        if (direction == "ArrowUp" && this.y > 80) {
             this.y -= this.speed;
         }
         if (direction == "ArrowLeft" && this.x > 5) {
@@ -142,12 +141,8 @@ const gamePlay = {
                 clearInterval(rideTime)
                 cancelAnimationFrame(animationPower)
                 callLossModal()
-                
-
-
-
-
             }
+
             if (this.stokeLevel >= 15) {
                 clearInterval(rideTime)
                 cancelAnimationFrame(animationPower)
@@ -222,9 +217,8 @@ function callVictoryModal() {
 }
 
 
-//LISTENERS
 document.getElementById("start").addEventListener('click', (event) => {
-gamePlay.start();
+    gamePlay.start();
 });
 
 document.addEventListener('keydown', (event) => {
@@ -232,19 +226,19 @@ document.addEventListener('keydown', (event) => {
 });
 
 document.getElementById("myBtnLoss").addEventListener('click', (event) => {
-   gamePlay.time = 0;
-   gamePlay.stokeLevel = 10;
-   let modal = document.getElementById("myLoss");
-   modal.style.display = "none";
-   gamePlay.start();
+    gamePlay.time = 0;
+    gamePlay.stokeLevel = 10;
+    let modal = document.getElementById("myLoss");
+    modal.style.display = "none";
+    gamePlay.start();
 
 })
 
 document.getElementById("myBtnWin").addEventListener('click', (event) => {
-   gamePlay.time = 0;
-   gamePlay.stokeLevel = 10;
-   let modal = document.getElementById("myWin");
-   modal.style.display = "none";
-   gamePlay.start();
+    gamePlay.time = 0;
+    gamePlay.stokeLevel = 10;
+    let modal = document.getElementById("myWin");
+    modal.style.display = "none";
+    gamePlay.start();
 
 })
