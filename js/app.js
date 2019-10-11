@@ -2,8 +2,13 @@ const canvas = document.getElementById('my-canvas')
 console.log(canvas);
 const ctx = canvas.getContext('2d');
 console.log(ctx);
-
 background.style.display = "none";
+document.getElementById("background").style.visibility = "hidden";
+document.getElementById("surfer").style.visibility = "hidden";
+document.getElementById("swimmer").style.visibility = "hidden";
+document.getElementById("seal").style.visibility = "hidden";
+document.getElementById("jelly").style.visibility = "hidden";
+document.getElementById("shark").style.visibility = "hidden";
 
 //OBJECTS
 class Obstacle {
@@ -211,4 +216,6 @@ document.addEventListener('keydown', (event) => {
 //     gamePlay.start();
 //     animate()
 // });
+
+// surfer.style.display = "none";
 gamePlay.start();
