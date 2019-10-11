@@ -1,17 +1,16 @@
+//This code hides HTML elements required for canvas on the page.
 background.style.display = "none";
 document.getElementById("surfer").style.visibility = "hidden";
 document.getElementById("swimmer").style.visibility = "hidden";
 document.getElementById("seal").style.visibility = "hidden";
 document.getElementById("jelly").style.visibility = "hidden";
 document.getElementById("shark").style.visibility = "hidden";
-
+//Canvas implementation
 const canvas = document.getElementById('my-canvas')
-console.log(canvas);
 const ctx = canvas.getContext('2d');
-console.log(ctx);
 
+//The obstacle class.  Obstacles are are randomly instantiated with different types.  Also, their y axis is determined at random as well, which creates staggered deployment into the gamespace.  The move function also fluctuates the objects speed.   
 class Obstacle {
-
     constructor() {
         const animalPossibilities = ["swimmer", "seal", "jelly", "shark"];
         this.type = animalPossibilities[Math.floor(Math.random() * animalPossibilities.length)];
@@ -31,7 +30,7 @@ class Obstacle {
     }
 
 }
-
+//This object is the background image on the canvas
 const theWave = {
     x: 0,
     y: 0,
@@ -40,7 +39,7 @@ const theWave = {
         ctx.drawImage(image, this.x, this.y)
     }
 }
-
+//The hero object.
 const surfer = {
     x: 50,
     y: 150,
@@ -52,7 +51,7 @@ const surfer = {
         let surfDude = document.getElementById("surfer");
         ctx.drawImage(surfDude, this.x, this.y)
     },
-
+//How the surfer navigates the game.
     move(direction) {
         if (direction == "ArrowDown" && this.y < 300) {
             this.y += this.speed;
@@ -67,9 +66,8 @@ const surfer = {
             this.x += this.speed;
         }
     },
-
+//The collision function checks all around the surfer's space on the grid.  If any coordinates overlap a collision is detected.  
     checkCollision() {
-        //This will work unless surfer collides with 2 animals at the exact same instant  
         let index = null
         for (let i = 0; i < gamePlay.animals.length; i++) {
             let collide = gamePlay.animals[i];
@@ -81,23 +79,20 @@ const surfer = {
             ) {
                 index = i
                 break;
-
             }
-
         }
-
+//This is where various points, depending on the obstacle type are determined
         this.index = index
         if (index !== null && gamePlay.animals[this.index].type === "swimmer") {
             gamePlay.stokeLevel = gamePlay.stokeLevel - 1;
-            console.log(gamePlay.stokeLevel)
+
         }
         if (index !== null && gamePlay.animals[this.index].type === "seal") {
             gamePlay.stokeLevel = gamePlay.stokeLevel - 3;
-            console.log(gamePlay.stokeLevel)
+
         }
         if (index !== null && gamePlay.animals[this.index].type === "jelly") {
             gamePlay.stokeLevel = gamePlay.stokeLevel - 2;
-            console.log(gamePlay.stokeLevel)
         }
         if (index !== null && gamePlay.animals[this.index].type === "shark") {
             gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
@@ -107,10 +102,10 @@ const surfer = {
         }
     }
 }
-
 theWave.draw();
 
-//GAMEPLAY OBJECT
+
+//GAMEPLAY OBJECT containes the start function, the game timer, display, draw, and move functions
 const gamePlay = {
     time: 0,
     stokeLevel: 10,
@@ -123,7 +118,7 @@ const gamePlay = {
         surfer.draw()
 
     },
-
+//The timer function handles gametime as well as the timed deployment of obstacles into the game environment.  It is also responsible for the win/lose
     timer: function() {
         const rideTime = setInterval(() => {
             this.time++
