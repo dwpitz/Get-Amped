@@ -122,7 +122,7 @@ const gamePlay = {
         gamePlay.timer()
         theWave.draw();
         surfer.draw()
-        // animate() //<==== Do this later...
+
     },
 
     timer: function() {
@@ -142,14 +142,22 @@ const gamePlay = {
             }
 
             if (this.stokeLevel <= 0) {
-    			console.log('You LOSE');
-    			alert("TOTAL WIPEOUT, DUDE. ")
-    			// document.getElementById("my-canvas").src = "https://media.giphy.com/media/2FSr2rzHyCvUA/giphy.mp4"
+                clearInterval(rideTime)
+                cancelAnimationFrame(animationPower)
+                console.log('You LOSE');
+                alert("Bruh, you lost...BA")
+                
+
+    			
 
 
     	}
     		if(this.stokeLevel >= 15) {
-    			alert("YOU WIN! SO SO STOKED!!")
+    			clearInterval(rideTime)
+                cancelAnimationFrame(animationPower)
+                console.log('You LOSE');
+                alert("Bruh, you lost...BA")
+
     	}
 
         }, 1000);
@@ -183,7 +191,11 @@ function animate() {
     surfer.draw();
     gamePlay.drawAnimals()
     surfer.checkCollision();
-    window.requestAnimationFrame(animate)
+    animationPower = window.requestAnimationFrame(animate)
+}
+
+function stopAnimation() {
+    clearCanvas();
 }
 
 function clearCanvas() {
