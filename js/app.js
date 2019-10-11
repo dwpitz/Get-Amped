@@ -141,8 +141,7 @@ const gamePlay = {
             if (this.stokeLevel <= 0) {
                 clearInterval(rideTime)
                 cancelAnimationFrame(animationPower)
-                console.log('You LOSE');
-                callModal()
+                callLossModal()
                 
 
 
@@ -152,9 +151,7 @@ const gamePlay = {
             if (this.stokeLevel >= 15) {
                 clearInterval(rideTime)
                 cancelAnimationFrame(animationPower)
-                console.log('You LOSE');
-                alert("Bruh, you lost...BA")
-
+                callVictoryModal()
             }
 
         }, 1000);
@@ -164,7 +161,7 @@ const gamePlay = {
         const timer = document.getElementById("ride-time");
         timer.textContent = this.time
         const stokeLevel = document.getElementById("stoke-level");
-        stokeLevel.textContent = (`Stoke Level:  ${this.stokeLevel}`)
+        stokeLevel.textContent = (`         ${this.stokeLevel}`)
     },
 
     drawAnimals: function() {
@@ -196,22 +193,40 @@ function clearCanvas() {
     ctx.clearRect(0, 0, canvas.height, canvas.width)
 }
 
-function callModal(){
-let modal = document.getElementById("myLoss");
-let span = document.getElementsByClassName("closeLoss")[0];
+function callLossModal() {
+    let modal = document.getElementById("myLoss");
+    let span = document.getElementsByClassName("closeLoss")[0];
     modal.style.display = "block";
-span.onclick = function() {
-    modal.style.display = "none";
-}
-window.onclick = function(event) {
-    if (event.target == modal) {
+    span.onclick = function() {
         modal.style.display = "none";
     }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 }
+
+function callVictoryModal() {
+    let modal = document.getElementById("myWin");
+    let span = document.getElementsByClassName("closeWin")[0];
+    modal.style.display = "block";
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 }
 
 
 //LISTENERS
+document.getElementById("start").addEventListener('click', (event) => {
+gamePlay.start();
+});
+
 document.addEventListener('keydown', (event) => {
     surfer.move(event.key)
 });
@@ -224,4 +239,12 @@ document.getElementById("myBtnLoss").addEventListener('click', (event) => {
    gamePlay.start();
 
 })
-gamePlay.start();
+
+document.getElementById("myBtnWin").addEventListener('click', (event) => {
+   gamePlay.time = 0;
+   gamePlay.stokeLevel = 10;
+   let modal = document.getElementById("myWin");
+   modal.style.display = "none";
+   gamePlay.start();
+
+})
