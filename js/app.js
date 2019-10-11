@@ -23,7 +23,7 @@ class Obstacle {
     }
 
     move() {
-        this.x -= Math.floor(Math.random() * 10) + 7;
+        this.x -= Math.floor(Math.random() * 10) + 4;
     }
 
 }
