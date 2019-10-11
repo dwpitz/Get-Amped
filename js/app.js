@@ -51,7 +51,7 @@ const surfer = {
         let surfDude = document.getElementById("surfer");
         ctx.drawImage(surfDude, this.x, this.y)
     },
-//How the surfer navigates the game.
+    //How the surfer navigates the game.
     move(direction) {
         if (direction == "ArrowDown" && this.y < 300) {
             this.y += this.speed;
@@ -66,7 +66,7 @@ const surfer = {
             this.x += this.speed;
         }
     },
-//The collision function checks all around the surfer's space on the grid.  If any coordinates overlap a collision is detected.  
+    //The collision function checks all around the surfer's space on the grid.  If any coordinates overlap a collision is detected.  
     checkCollision() {
         let index = null
         for (let i = 0; i < gamePlay.animals.length; i++) {
@@ -81,7 +81,7 @@ const surfer = {
                 break;
             }
         }
-//This is where various points, depending on the obstacle type are determined
+        //This is where various points, depending on the obstacle type are determined
         this.index = index
         if (index !== null && gamePlay.animals[this.index].type === "swimmer") {
             gamePlay.stokeLevel = gamePlay.stokeLevel - 1;
@@ -118,7 +118,7 @@ const gamePlay = {
         surfer.draw()
 
     },
-//The timer function handles gametime as well as the timed deployment of obstacles into the game environment.  It is also responsible for the win/lose
+    //The timer function handles gametime as well as the timed deployment of obstacles into the game environment.  It is also responsible for the win/lose functionality.  
     timer: function() {
         const rideTime = setInterval(() => {
             this.time++
@@ -168,7 +168,6 @@ const gamePlay = {
 }
 
 function animate() {
-
     gamePlay.moveAnimals()
     clearCanvas();
     theWave.draw();

@@ -54,7 +54,7 @@ canvas {
     height: 100%;
     border: 1px dotted;
     border-color: black;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-contentWin {
@@ -102,7 +102,7 @@ canvas {
     height: 100%;
     border: 1px dotted;
     border-color: black;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-contentLoss {
