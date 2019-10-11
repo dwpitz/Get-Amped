@@ -1,16 +1,16 @@
-const canvas = document.getElementById('my-canvas')
-console.log(canvas);
-const ctx = canvas.getContext('2d');
-console.log(ctx);
 background.style.display = "none";
-document.getElementById("background").style.visibility = "hidden";
 document.getElementById("surfer").style.visibility = "hidden";
 document.getElementById("swimmer").style.visibility = "hidden";
 document.getElementById("seal").style.visibility = "hidden";
 document.getElementById("jelly").style.visibility = "hidden";
 document.getElementById("shark").style.visibility = "hidden";
 
-//OBJECTS
+
+const canvas = document.getElementById('my-canvas')
+console.log(canvas);
+const ctx = canvas.getContext('2d');
+console.log(ctx);
+
 class Obstacle {
 
     constructor() {
@@ -80,9 +80,7 @@ const surfer = {
                 collide.y < this.y + this.height &&
                 collide.y + collide.height > this.y
             ) {
-                console.log("Collision!")
                 index = i
-                console.log(index)
                 break;
 
             }
@@ -104,7 +102,6 @@ const surfer = {
         }
         if (index !== null && gamePlay.animals[this.index].type === "shark") {
             gamePlay.stokeLevel = gamePlay.stokeLevel - 4;
-            console.log(gamePlay.stokeLevel)
         }
         if (index !== null) {
             gamePlay.animals.splice(index, 1)
@@ -120,10 +117,8 @@ const gamePlay = {
     stokeLevel: 10,
     animals: [],
     start: function() {
-    	theWave.draw();
-    	// gamePlay.start();
-    	alert('Ready To Get Amped?') //<======Temporary...should be a DOM element soon
-    	animate()
+        theWave.draw();
+        animate()
         gamePlay.timer()
         theWave.draw();
         surfer.draw()
@@ -134,36 +129,33 @@ const gamePlay = {
         const rideTime = setInterval(() => {
             this.time++
             this.printStats();
-
-            // const arbTime = Math.floor(Math.random() * 3 + 1)
-            // if (this.time %  === 0) {
-                const o = new Obstacle();
-                gamePlay.animals.push(o)
+            const o = new Obstacle();
+            gamePlay.animals.push(o)
             // }
 
-            if (this.time % 10 === 0){
-            	this.stokeLevel++
-            	this.printStats();
+            if (this.time % 10 === 0) {
+                this.stokeLevel++
+                this.printStats();
             }
 
             if (this.stokeLevel <= 0) {
                 clearInterval(rideTime)
                 cancelAnimationFrame(animationPower)
                 console.log('You LOSE');
-                alert("Bruh, you lost...BA")
+                callModal()
                 
 
-    			
 
 
-    	}
-    		if(this.stokeLevel >= 15) {
-    			clearInterval(rideTime)
+
+            }
+            if (this.stokeLevel >= 15) {
+                clearInterval(rideTime)
                 cancelAnimationFrame(animationPower)
                 console.log('You LOSE');
                 alert("Bruh, you lost...BA")
 
-    	}
+            }
 
         }, 1000);
     },
@@ -189,7 +181,7 @@ const gamePlay = {
 }
 
 function animate() {
-    //surfer.checkCollision();
+
     gamePlay.moveAnimals()
     clearCanvas();
     theWave.draw();
@@ -199,12 +191,23 @@ function animate() {
     animationPower = window.requestAnimationFrame(animate)
 }
 
-function stopAnimation() {
-    clearCanvas();
-}
 
 function clearCanvas() {
     ctx.clearRect(0, 0, canvas.height, canvas.width)
+}
+
+function callModal(){
+var modal = document.getElementById("myModal");
+let span = document.getElementsByClassName("close")[0];
+    modal.style.display = "block";
+span.onclick = function() {
+    modal.style.display = "none";
+}
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 }
 
 
@@ -212,10 +215,4 @@ function clearCanvas() {
 document.addEventListener('keydown', (event) => {
     surfer.move(event.key)
 });
-// document.getElementById("animation").addEventListener('click', (event) => {
-//     gamePlay.start();
-//     animate()
-// });
-
-// surfer.style.display = "none";
 gamePlay.start();
