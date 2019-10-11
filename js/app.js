@@ -197,8 +197,8 @@ function clearCanvas() {
 }
 
 function callModal(){
-let modal = document.getElementById("myModal");
-let span = document.getElementsByClassName("close")[0];
+let modal = document.getElementById("myLoss");
+let span = document.getElementsByClassName("closeLoss")[0];
     modal.style.display = "block";
 span.onclick = function() {
     modal.style.display = "none";
@@ -216,10 +216,10 @@ document.addEventListener('keydown', (event) => {
     surfer.move(event.key)
 });
 
-document.getElementById("myBtn").addEventListener('click', (event) => {
+document.getElementById("myBtnLoss").addEventListener('click', (event) => {
    gamePlay.time = 0;
    gamePlay.stokeLevel = 10;
-   let modal = document.getElementById("myModal");
+   let modal = document.getElementById("myLoss");
    modal.style.display = "none";
    gamePlay.start();
 
